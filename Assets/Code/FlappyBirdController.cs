@@ -26,7 +26,7 @@ public class FlappyBirdController : MonoBehaviour {
 
         // reset score
         Score = 0;
-        ScoreText.text = Score.ToString();
+        ScoreText.text = "SCORE: " + Score.ToString();
 
         // reset pipes
         PipeCount = 0;
@@ -67,7 +67,7 @@ public class FlappyBirdController : MonoBehaviour {
             pipe.transform.name = (++PipeCount).ToString();
 
             // pipe position
-            pipe.transform.position += Vector3.right * 30;
+            pipe.transform.position += Vector3.right * 12;
             pipe.transform.position += Vector3.up * Mathf.Lerp(4, 9, Random.value);
         }
 
@@ -80,7 +80,7 @@ public class FlappyBirdController : MonoBehaviour {
         // nose dive
         float speedTo01Range = Mathf.InverseLerp(-10, 10, VerticalSpeed);
         float noseAngle = Mathf.Lerp(-30, 30, speedTo01Range);
-        Bird.transform.rotation = Quaternion.Euler(Vector3.forward * noseAngle);
+        Bird.transform.rotation = Quaternion.Euler(Vector3.forward * noseAngle) * Quaternion.Euler(Vector3.up * 20);
 
         // wings
         float flapSpeed = (VerticalSpeed > 0) ? 30 : 5;
@@ -96,12 +96,12 @@ public class FlappyBirdController : MonoBehaviour {
                 int pipeId = int.Parse(pipe.name);
                 if (pipeId > Score) {
                     Score = pipeId;
-                    ScoreText.text = Score.ToString();
+                    ScoreText.text = "SCORE: " + Score.ToString();
                 }
             }
 
             // when pipe is offscreen
-            if (pipe.position.x < -30) {
+            if (pipe.position.x < -12) {
                 Destroy(pipe.gameObject);
             }
         }
