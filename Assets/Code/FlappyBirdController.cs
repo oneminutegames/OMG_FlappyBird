@@ -48,7 +48,7 @@ public class FlappyBirdController : MonoBehaviour {
         // STEP 1 - Movement
         VerticalSpeed += -Gravity * Time.deltaTime;
 
-        if (Input.GetKeyDown(KeyCode.Space)) {
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0)) {
             VerticalSpeed = 0;
             VerticalSpeed += Jump;
         }
